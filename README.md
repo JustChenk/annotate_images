@@ -7,6 +7,22 @@
 然后将该文件夹与图片文件夹放于统一路径
 
 # 使用需知
-在result_to_xml_demo.py 文件中
+在result_to_xml_demo.py 文件中找到如下函数：
+@torchsnooper.snoop()
+def annotate_one_image(img_path):
+    # img_path = "02.jpg"
 
-将Yolov8 模型权重修改为你所要使用的权重文件
+    model = YOLO("best.pt") # 将文件替换为你需要的模型权重文件
+    results = model([img_path])
+    boxes = results[0].boxes
+
+    image_name = os.path.basename(img_path)
+    xml_name = os.path.splitext(image_name)[-2]
+    annotate_to_xml(f"{xml_name}.xml", img_path, boxes)
+
+    return 0
+
+model = YOLO("best.pt") # 将文件替换为你需要的模型权重文件
+将Yolov8 模型权重修改为你需要的权重文件
+
+
