@@ -1,5 +1,7 @@
 """
 单张图片demo示例
+生成的xml文件与本demo在同一目录下
+
 后续扩充为遍历文件夹内所有图片
 """
 
@@ -14,29 +16,11 @@ from ultralytics import YOLO
 
 
 def img_hwd(img_path):
-    """
-    return the shape of image
-    Args:
-        img_path:
-
-    Returns:
-
-    """
     img = cv2.imread(img_path)
     return img.shape
 
 
 def sub_text_ele(parent_ele, ele_name, ele_text):
-    """
-    创建子
-    Args:
-        parent_ele: parent element
-        ele_name: children element tag
-        ele_text: children element dictionary of attributes
-
-    Returns:
-
-    """
     ele = ET.SubElement(parent_ele, ele_name)
     ele.text = ele_text
 
@@ -59,16 +43,6 @@ def annotate_img_info(annotation, img_path):
 
 
 def annotate_a_class(annotation, cls_tensor):
-    """
-
-    Args:
-        annotation:xml文件的root element
-        cls_tensor: 一个cls张量
-
-    Returns:
-
-    """
-
     if int(int(cls_tensor.item())) == 1:
         sub_text_ele(annotation, "name", "human")
     else:
@@ -76,15 +50,6 @@ def annotate_a_class(annotation, cls_tensor):
 
 
 def annotate_a_box(annotation, box_tensor, cls_tensor):
-    """
-
-    Args:
-        annotation: xml文件的root element
-        box_tensor: 一个box的张量
-
-    Returns:
-
-    """
     object_elem = ET.SubElement(annotation, "object")
 
     # 判断这个box的class
@@ -104,23 +69,8 @@ def annotate_a_box(annotation, box_tensor, cls_tensor):
 
 @torchsnooper.snoop()
 def annotate_to_xml(xml_file, img_path, boxes):
-    """
-
-    Args:
-        xml_file:将生成的xml文件保存为xml_file
-        img_path: 处理的图片路径
-        boxes_tensor: Yolo处理结果，的.boxes属性
-
-    Returns:
-
-    """
     annotation = ET.Element("annotation")
     annotate_img_info(annotation, img_path)
-
-    # boxes_cls = boxes.cls
-    # 还是要吧class和box参数一起写
-    # for cls in boxes_cls:
-    #     annotate_a_class(annotation, cls)
 
     cls_tensor = boxes.cls
     boxes_tensor = boxes.xyxy
@@ -137,7 +87,7 @@ def annotate_to_xml(xml_file, img_path, boxes):
 def annotate_one_image(img_path):
     # img_path = "02.jpg"
 
-    model = YOLO("human_and_face_best.pt") # 将文件替换为你需要的模型权重文件
+    model = YOLO("best.pt") # 将文件替换为你需要的模型权重文件
     results = model([img_path])
     boxes = results[0].boxes
 
@@ -149,7 +99,7 @@ def annotate_one_image(img_path):
 
 
 if __name__ == "__main__":
-    img_path = "02.jpg"
+    img_path = "02.jpg"  # 更换为你的图片路径
     annotate_one_image(img_path)
 
 
