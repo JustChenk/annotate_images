@@ -44,5 +44,5 @@ def annotate_batch_image(img_file):
 
 
 if __name__ == "__main__":
-    img_file = r"C:\github\pycode\practice\Examples\23_11\images"
+    img_file = r"Your\image\files\path"
     annotate_batch_image(img_file)
