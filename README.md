@@ -6,7 +6,7 @@
 可通过linux 命令: "mv *.xml  file_xml"将生成的xml文件转移至指定文件夹（file_xml）；  
 然后将该文件夹与图片文件夹放于统一路径
 
-# 使用需知
+# 使用教程
 ## 在result_to_xml_demo.py 文件中修改模型权重：
 找到如下函数
 
@@ -31,12 +31,14 @@ def annotate_one_image(img_path):
 于result_to_xml_demo.py 文件中，将图片路径修改为你本地图片路径即可
 
 ## 在result_to_xml_batch.py 文件中修改图片文件夹路径：
-找到如下函数：
+在如下函数中，输入你自己图片文件夹的路径 img_file.
 ```python
-
+if __name__ == "__main__":
+    img_file = r"Your\image\files\path"
+    annotate_batch_image(img_file)
 ```
 
-将 改为你自己图片的文件夹路径
+
 
 
 
