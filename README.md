@@ -7,6 +7,10 @@
 然后将该文件夹与图片文件夹放于统一路径
 
 # 使用教程
+## 两个python文件需在同一目录下
+result_to_xml_demo.py  单张图片效果展示  
+result_to_xml_batch.py 批量处理单个文件夹内所有图片
+
 ## 在result_to_xml_demo.py 文件中修改模型权重：
 找到如下函数
 
@@ -25,7 +29,7 @@ def annotate_one_image(img_path):
     return 0
 ```
 
-将Yolov8 模型权重修改为你需要的权重文件
+将Yolov8 模型权重修改为针对所要标记数据集的权重文件
 
 ## 单张图片demo展示
 于result_to_xml_demo.py 文件中，将图片路径修改为你本地图片路径即可
