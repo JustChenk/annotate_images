@@ -35,7 +35,25 @@ def annotate_one_image(img_path):
 
 在如下代码中，将class对应的标签类别根据你所要标注的数据集进行修改
 ```python
+def annotate_a_box(annotation, box_tensor, cls_tensor):
+    object_elem = ET.SubElement(annotation, "object")
 
+    # 判断这个box的class
+    # sub_text_ele(object_elem, "name", "human")
+    if int(int(cls_tensor.item())) == 1:
+        sub_text_ele(object_elem, "name", "human")
+    elif int(int(cls_tensor.item())) == 0:
+        sub_text_ele(object_elem, "name", "face")
+    else:
+        sub_text_ele(object_elem, "name", "others")
+
+    sub_text_ele(object_elem, "pose", "Unspecified")
+    sub_text_ele(object_elem, "truncated", "0")
+    sub_text_ele(object_elem, "difficult", "0")
+
+    bndbox = ET.SubElement(object_elem, "bndbox")
+    for i, _name in enumerate(["xmin", "ymin", "xmax", 'ymax']):
+        sub_text_ele(bndbox, _name, str(box_tensor[i].numpy()))
 ```
 
 ## 单张图片demo展示
