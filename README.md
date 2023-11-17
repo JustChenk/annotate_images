@@ -32,7 +32,7 @@ def annotate_one_image(img_path):
 将Yolov8 模型权重修改为针对所要标记数据集的权重文件
 
 ## 单张图片demo展示
-于result_to_xml_demo.py 文件中，将图片路径修改为你本地图片路径即可
+于result_to_xml_demo.py 文件中，将图片路径修改为你本地图片路径
 
 ## 在result_to_xml_batch.py 文件中修改图片文件夹路径：
 在如下函数中，输入你自己图片文件夹的路径 img_file.
