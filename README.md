@@ -11,7 +11,8 @@
 result_to_xml_demo.py  单张图片效果展示  
 result_to_xml_batch.py 批量处理单个文件夹内所有图片
 
-## 在result_to_xml_demo.py 文件中修改模型权重：
+## 在result_to_xml_demo.py 文件中：
+### 修改模型权重文件
 找到如下函数
 
 ```python
@@ -30,6 +31,12 @@ def annotate_one_image(img_path):
 ```
 
 将Yolov8 模型权重修改为针对所要标记数据集的权重文件
+### 修改所要标记的类型
+
+在如下代码中，将class对应的标签类别根据你所要标注的数据集进行修改
+```python
+
+```
 
 ## 单张图片demo展示
 于result_to_xml_demo.py 文件中，将图片路径修改为你本地图片路径
